@@ -487,12 +487,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact & Support
 
-- **Email:** your.email@example.com
-- **GitHub:** [@yourusername](https://github.com/yourusername)
-- **LinkedIn:** [Your Name](https://linkedin.com/in/yourprofile)
+- **Email:** naufaalfakhri@gmail.com
+- **GitHub:** [@naufalfakhri14](https://github.com/naufalfakhri14)
+- **LinkedIn:** [Naufal Fakhri](https://linkedin.com/in/naufaal-fakhri)
+  
 
 ### Report Issues
-Jika menemukan bug atau memiliki saran, silakan buat [Issue di GitHub](https://github.com/username/repo/issues)
+Jika menemukan bug atau memiliki saran, silakan buat [Issue di GitHub](https://github.com/naufalfakhri14/deep-learning-product-recommendation-nlp)
 
 ---
 
