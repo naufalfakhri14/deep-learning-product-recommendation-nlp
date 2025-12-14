@@ -1,10 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pickle
 import os
-from sklearn.metrics.pairwise import cosine_similarity
-from tensorflow import keras
 from PIL import Image
 
 # Page config
@@ -174,24 +171,16 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Load data
 @st.cache_resource
-def load_models_and_data():
+def load_data():
     try:
-        # Load DataFrame
-        df = pd.read_csv('deployment_files/skincare_products.csv')
-        
-        # Load similarity matrix
-        similarity_matrix = np.load('deployment_files/similarity_matrix.npy')
-        
-        # Load model
-        model = keras.models.load_model('deployment_files/skincare_model.h5')
-        
-        return df, similarity_matrix, model
+        df = pd.read_csv("deployment_files/skincare_products.csv")
+        similarity_matrix = np.load("deployment_files/similarity_matrix.npy")
+        return df, similarity_matrix
     except Exception as e:
-        st.error(f"Error loading data: {e}")
-        st.info("💡 Tip: Jalankan cell terakhir di notebook untuk export data ke folder deployment_files")
-        return None, None, None
+        st.error(f"❌ Gagal load data: {e}")
+        return None, None
+
 
 # Fungsi untuk mencari gambar produk
 def get_product_image(product_name, brand):
@@ -259,7 +248,8 @@ def recommend_products(df, similarity_matrix, product_idx, top_n=5,
     return pd.DataFrame(recommendations)
 
 # Load models
-df, similarity_matrix, model = load_models_and_data()
+df, similarity_matrix = load_data()
+
 
 if df is not None:
     # Sidebar
@@ -622,14 +612,11 @@ if df is not None:
                 st.rerun()
 
 else:
-    st.error("❌ Gagal memuat data. Pastikan semua file yang dibutuhkan tersedia.")
+    st.error("❌ Gagal memuat data. Pastikan file berikut tersedia:")
     st.markdown("""
     ### 📝 File yang Dibutuhkan:
-    1. `skincare_data.pkl` - Data produk skincare
-    2. `similarity_matrix.npy` - Matriks similarity
-    3. `skincare_model.h5` - Model TensorFlow
-    
-    Jalankan notebook terlebih dahulu untuk menghasilkan file-file ini.
+    1. `deployment_files/skincare_products.csv`
+    2. `deployment_files/similarity_matrix.npy`
     """)
 
 # Footer
