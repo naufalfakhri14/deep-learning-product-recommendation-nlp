@@ -182,24 +182,19 @@ def load_data():
         return None, None
 
 
-# Fungsi untuk mencari gambar produk
 def get_product_image(product_name, brand):
-    """Mencari gambar produk di folder brand"""
     try:
         brand_folder = brand.lower()
-        image_path = os.path.join(brand_folder, f"{product_name}.jpg")
-        
-        # Cek jika file ada
-        if os.path.exists(image_path):
-            return image_path
-        
-        # Coba format png
-        image_path_png = os.path.join(brand_folder, f"{product_name}.png")
-        if os.path.exists(image_path_png):
-            return image_path_png
-            
+
+        if not os.path.isdir(brand_folder):
+            return None
+
+        for file in os.listdir(brand_folder):
+            if product_name.lower() in file.lower():
+                return os.path.join(brand_folder, file)
+
         return None
-    except Exception as e:
+    except:
         return None
 
 # Fungsi rekomendasi
